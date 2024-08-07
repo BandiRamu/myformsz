@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <link rel="stylesheet" href="foms.css">
+
+    <body>
+        <div class="conatiner">
+            <form>
+                <i class="fas fa-paper-plane"></i>
+                <div class="input-group">
+                    <label> Full Name</label>
+                    <input type="text" placeholder="Enter your Name" id="Contact-name" onkeyup="validateName()">
+                    <span id="name-error"> </span>
+                </div>
+
+                <div class="input-group">
+                    <label> Phone No.</label>
+                    <input type="tel" placeholder="99999 99999" id="contact-phone" onkeyup="validatephone()">
+                    <span id="phone-error"> </span>
+                </div>
+                <div class="input-group">
+                    <label> Email id</label>
+                    <input type="email" placeholder="Enter Email" id="contact-email" onkeyup="validateEmail()">
+                    <span id="email-error"> </span>
+                </div>
+
+                <div class="input-group">
+                    <label> Your Message </label>
+                    <textarea name="text" rows="3" cols="2" placeholder="Enter your Message" id="contct-message"
+                        onkeyup="validateMessage()"></textarea>
+                    <!-- <input type="text" placeholder="Enter your Message" id="contct-message" onkeyup="validateMessage()"> -->
+                    <span id="message-error"> </span>
+                </div>
+                <button onclick=" validateForm()"> submit</button>
+                <span id="submit-error"> </span>
+            </form>
+        </div>
+
+    </body>
+
+    <script>
+        var nameError = document.getElementById('name-error');
+        var phoneError = document.getElementById('phone-error');
+        var emailError = document.getElementById('email-error');
+        var messageError = document.getElementById('message-error');
+        var submitError = document.getElementById('submit-error');
+
+        function validateName() {
+            var name = document.getElementById('Contact-name').value;
+            if (name.trim() == "") {
+                alert("Please enter  your Full Name");
+                return;
+            }
+            if (name.lengt == 0) {
+                nameError.innerHTML = " name is required";
+                return false;
+            }
+
+            if (!name.match(/^[A-Za-z]*\s{1}[A-Za-z]*$/)) {
+                nameError.innerHTML = " Write full Name";
+                return false;
+            }
+            // if (name.match(/^[A-Za-z])\._\-[0-9]*@[A-Za-z]*[\.][a-z{2,4}$/]))
+
+            nameError.innerHTML = '<i class ="fas fa-check-circle"></i>';
+            return true;
+
+        }
+
+        function validatephone() {
+            var phone = document.getElementById('contact-phone').value;
+
+            if (phone.trim() == "") {
+                alert("Please enter a Phone Number");
+                return;
+            }
+            if (phone.length == 0) {
+                phoneError.innerHTML = " Enter the  Phone number";
+                return false;
+            }
+            if (!phone.length == 10) {
+                phoneError.innerHTML = " Enter the 10 digit phone Number";
+                return false;
+            }
+            if (!phone.match(/^[0-9]{10}$/)) {
+                phoneError.innerHTML = "only  numbers ";
+                return false;
+            }
+            phoneError.innerHTML = '<i class ="fas fa-check-circle"></i>';
+            return true;
+        }
+
+        function validateEmail() {
+            var email = document.getElementById('contact-email').value;
+
+            if (email.trim() == "") {
+                alert("Please enter Email Id");
+                return;
+            }
+
+            if (email.length == 0) {
+                emailError.innerHTML = "entert the Email";
+                return false;
+            }
+
+            // if(!email.match(/^[A-Za-z]\._\-[0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)){
+            if (!email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)) {
+                emailError.innerHTML = "Invalid email";
+                return false;
+            }
+
+            emailError.innerHTML = '<i class ="fas fa-check-circle"></i>';
+            return true;
+            // }
+        }
+
+        function validateMessage() {
+            message = document.getElementById('contct-message').value;
+            var required = 25;
+            var left = required - message.length;
+
+            if (message.trim() == "") {
+                alert("Please enter the Message");
+                return;
+            }
+
+            if (left > 0) {
+                messageError.innerHTML = left + ' more characters required ';
+                return false;
+            }
+
+            messageError.innerHTML = '<i class ="fas fa-check-circle"></i>';
+            return true;
+        }
+
+
+        function validateForm() {
+
+            message = document.getElementById('contct-message').value;
+
+            if (!validateName() || validatephone() || validateEmail() || validateMessage()) {
+                submitError.style.display = 'block';
+                submitError.innerHTML = "fill all  details before the Submit";
+                setTimeout(function () { submitError.style.display = 'none'; }, 4000);
+                return false;
+            }
+        }
+
+
+        // validateName().innerHTML="";
+        document.getElementById('name-error').value = "";
+
+    </script>
+
+    </html>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: serif;
+        }
+
+        .conatiner {
+            width: 100%;
+            height: 100vh;
+            background-color: lightblue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .conatiner form {
+            width: 90%;
+            max-width: 500px;
+            padding: 50px 30px 20px;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 4px 3px rgba(0, 0, 0, 0.5);
+            position: relative;
+
+        }
+
+
+
+        .input-group label {
+            flex-basis: 28%;
+        }
+
+
+        .input-group input,
+        .input-group textarea {
+            flex-basis: 68%;
+            background: transparent;
+            border: 1px solid black;
+            /* border: 0; */
+            outline: 0;
+            margin-right: 10px;
+        }
+
+        .input-group span {
+            color: rgb(236, 47, 94);
+        }
+
+        .fa-paper-plane {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: traslate(-50%, -50%);
+            background: #dd7575;
+            font-size: 26px;
+            padding: 2px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .input-group {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            position: relative;
+        }
+
+        ::placeholder {
+            font-size: 14px;
+        }
+
+        form button {
+            background: #141a34;
+            color: #fff;
+            border-radius: 4px;
+            border: 1 px solid rgba(255, 255, 255, 0.7);
+            outline: 0;
+            cursor: pointer;
+            display: block;
+            margin: 10px auto 10px;
+            width: 65px;
+            height: 29px;
+        }
+
+
+        #submit-error {
+            color: red;
+            width: 65px;
+            height: 29px;
+        }
+
+        i {
+            color: green;
+        }
+    </style>
+
+
+
+
+</body>
+<script src="forms.js"></script>
+
+</html>
